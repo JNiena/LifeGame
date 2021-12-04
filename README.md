@@ -1,9 +1,13 @@
 **Controls**
-  - Advance one generation: **Enter**
+  - Toggle cell **Left Click**
   - Clear all cells: **C**
   - Randomize all cells: **R**
   - Alternate cell color: **G**
+  - Alternate background color: **B**
   - Toggle lines: **L**
-  - Play/Pause: **Space**
+  - Toggle cursor: **H**
+  - Start/Stop: **Space**
   - Increase speed: **+**
   - Decrease speed: **-**
+  - Move cursor: **W/A/S/D**
+  - Toggle cell at cursor **Enter**
