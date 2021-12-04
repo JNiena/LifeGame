@@ -12,6 +12,7 @@ public class Game extends Application {
 
 	private LifeGame game;
 	private LifeGamePlayer player;
+	private LifeGameCursor cursor;
 	private LifeGameRenderer renderer;
 	private int size;
 
@@ -23,7 +24,8 @@ public class Game extends Application {
 	public void start() {
 		game = new LifeGame(Gdx.graphics.getWidth() / size, Gdx.graphics.getHeight() / size);
 		player = new LifeGamePlayer(game, 0f, 0.05f);
-		renderer = new LifeGameRenderer(game, Color.YELLOW, Color.DARK_GRAY, size, true, true);
+		cursor = new LifeGameCursor(game, 1, 1);
+		renderer = new LifeGameRenderer(game, cursor, Color.YELLOW, Color.DARK_GRAY, size, true, true);
 		setupControls();
 		setupRendering();
 	}
@@ -31,10 +33,10 @@ public class Game extends Application {
 	private void setupControls() {
 		getMouseHandler().bindLeftClick((x, y) -> {
 			game.toggle(x / renderer.getSize() + 1, y / renderer.getSize() + 1);
-			renderer.moveCursor(x / renderer.getSize() + 1, y / renderer.getSize() + 1);
+			cursor.move(x / renderer.getSize() + 1, y / renderer.getSize() + 1);
 		});
 		KeyboardHandler keyboardHandler = getKeyboardHandler();
-		keyboardHandler.bindTappedKey(Keys.ENTER, () -> game.toggle(renderer.getCursorX(), renderer.getCursorY()));
+		keyboardHandler.bindTappedKey(Keys.ENTER, () -> game.toggle(cursor.getX(), cursor.getY()));
 		keyboardHandler.bindTappedKey(Keys.R, () -> game.randomize(50));
 		keyboardHandler.bindTappedKey(Keys.C, game::clear);
 		keyboardHandler.bindTappedKey(Keys.L, renderer::toggleLines);
@@ -44,10 +46,10 @@ public class Game extends Application {
 		keyboardHandler.bindTappedKey(Keys.EQUALS, () -> player.increaseSpeed(0.05f));
 		keyboardHandler.bindTappedKey(Keys.MINUS, () -> player.decreaseSpeed(0.05f));
 		keyboardHandler.bindTappedKey(Keys.SPACE, player::toggle);
-		keyboardHandler.bindTappedKey(Keys.W, () -> renderer.moveCursor(Direction.Up));
-		keyboardHandler.bindTappedKey(Keys.S, () -> renderer.moveCursor(Direction.Down));
-		keyboardHandler.bindTappedKey(Keys.A, () -> renderer.moveCursor(Direction.Left));
-		keyboardHandler.bindTappedKey(Keys.D, () -> renderer.moveCursor(Direction.Right));
+		keyboardHandler.bindTappedKey(Keys.W, () -> cursor.move(Direction.Up));
+		keyboardHandler.bindTappedKey(Keys.S, () -> cursor.move(Direction.Down));
+		keyboardHandler.bindTappedKey(Keys.A, () -> cursor.move(Direction.Left));
+		keyboardHandler.bindTappedKey(Keys.D, () -> cursor.move(Direction.Right));
 	}
 
 	private void setupRendering() {

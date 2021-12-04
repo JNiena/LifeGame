@@ -3,28 +3,26 @@ package game;
 import api.rendering.Renderable;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ScreenUtils;
-import game.utilities.Direction;
 import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class LifeGameRenderer implements Renderable {
 
 	private LifeGame game;
+	private LifeGameCursor cursor;
 	private Color alive;
 	private Color dead;
 	private int size;
 	private boolean drawLines;
 	private boolean drawCursor;
-	private int cursorX, cursorY;
 
-	public LifeGameRenderer(LifeGame game, Color alive, Color dead, int size, boolean drawLines, boolean drawCursor) {
+	public LifeGameRenderer(LifeGame game, LifeGameCursor cursor, Color alive, Color dead, int size, boolean drawLines, boolean drawCursor) {
 		this.game = game;
+		this.cursor = cursor;
 		this.alive = alive;
 		this.dead = dead;
 		this.size = size;
 		this.drawLines = drawLines;
 		this.drawCursor = drawCursor;
-		this.cursorX = 1;
-		this.cursorY = 1;
 	}
 
 	@Override
@@ -62,7 +60,7 @@ public class LifeGameRenderer implements Renderable {
 
 	private void drawCursor(ShapeDrawer renderer) {
 		renderer.setColor(Color.WHITE);
-		renderer.rectangle((cursorX - 1) * size, (cursorY - 1) * size, size, size);
+		renderer.rectangle((cursor.getX() - 1) * size, (cursor.getY() - 1) * size, size, size);
 	}
 
 	public void changeAliveColor(Color color) {
@@ -95,38 +93,6 @@ public class LifeGameRenderer implements Renderable {
 
 	public void toggleCursor() {
 		drawCursor = !drawCursor;
-	}
-
-	public void moveCursor(Direction direction, int amount) {
-		if (direction == Direction.Up) {
-			cursorY += amount;
-		}
-		else if (direction == Direction.Down) {
-			cursorY -= amount;
-		}
-		else if (direction == Direction.Left) {
-			cursorX -= amount;
-		}
-		else if (direction == Direction.Right) {
-			cursorX += amount;
-		}
-	}
-
-	public void moveCursor(Direction direction) {
-		moveCursor(direction, 1);
-	}
-
-	public void moveCursor(int x, int y) {
-		cursorX = x;
-		cursorY = y;
-	}
-
-	public int getCursorX() {
-		return cursorX;
-	}
-
-	public int getCursorY() {
-		return cursorY;
 	}
 
 	public int getSize() {
