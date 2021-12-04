@@ -20,7 +20,7 @@ public class Launcher {
 	}
 
 	private static void setupApplication() {
-		application = new Lwjgl3Application(new Game(4), configuration);
+		application = new Lwjgl3Application(new Game(60), configuration);
 	}
 
 }

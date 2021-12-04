@@ -42,11 +42,13 @@ public class BinaryGrid {
 	}
 
 	public void copyFrom(BinaryGrid grid) {
-		for (int x = 1; x <= getWidth(); x++) {
-			for (int y = 1; y <= getHeight(); y++) {
-				this.set(x, y, grid.get(x, y));
-			}
-		}
+		grid.copyTo(this);
+	}
+
+	public BinaryGrid copy() {
+		BinaryGrid newGrid = new BinaryGrid(getWidth(), getHeight());
+		copyTo(newGrid);
+		return newGrid;
 	}
 
 	public int getWidth() {

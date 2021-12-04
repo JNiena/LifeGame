@@ -24,9 +24,11 @@ public class MouseHandler {
 				y = Gdx.graphics.getHeight() - y;
 				if (button == 0) {
 					leftClickAction.accept(x, y);
-				} else if (button == 1) {
+				}
+				else if (button == 1) {
 					rightClickAction.accept(x, y);
-				} else if (button == 3) {
+				}
+				else if (button == 3) {
 					middleClickAction.accept(x, y);
 				}
 				return true;

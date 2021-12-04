@@ -35,7 +35,8 @@ public class LifeGamePlayer {
 	public void toggle() {
 		if (isRunning()) {
 			stop();
-		} else {
+		}
+		else {
 			start();
 		}
 	}
